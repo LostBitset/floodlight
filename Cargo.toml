@@ -1,8 +1,0 @@
-[package]
-name = "floodlight"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-tide = "0.16.0"
-tokio = { version = "1.41.1", features = ["full"] }
