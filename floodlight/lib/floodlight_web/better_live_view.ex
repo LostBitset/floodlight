@@ -12,9 +12,9 @@ defmodule FloodlightWeb.BetterLiveView do
 
       def mount(_, _, sock) do
         wrapped_update = mount(sock, if connected?(sock) do
-            :as_http
-          else
-            :as_live_view
+          :as_live_view
+        else
+          :as_http
         end)
         case wrapped_update do
           {:ok, up} -> {:ok, assign(sock, up)}

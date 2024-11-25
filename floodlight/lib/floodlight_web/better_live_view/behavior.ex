@@ -1,4 +1,6 @@
 defmodule FloodlightWeb.BetterLiveView.Behavior do
+  alias Phoenix.LiveView.Socket
+
   @type sock_update :: map
 
   @callback mount(

@@ -1,24 +1,22 @@
 defmodule FloodlightWeb.GameLive.Index do
 
   use FloodlightWeb, :live_view
-  use FloodlightWeb.BetterLiveView, wants: [:event]
+  use FloodlightWeb.BetterLiveView, wants: [:event, :info]
   alias FloodlightWeb.Endpoint
 
   defp mount(_, :as_http) do
-    Endpoint.subscribe("chat")
-    {:ok, %{
-      username: gen_username(),
-      messages: [],
-    }}
+    {:ok, initial_assigns()}
   end
 
   defp mount(_, :as_live_view) do
     Endpoint.subscribe("chat")
-    {:ok, %{
-      username: gen_username(),
-      messages: [],
-    }}
+    {:ok, initial_assigns()}
   end
+
+  defp initial_assigns, do: %{
+    username: gen_username(),
+    messages: [],
+  }
 
   def on_event("send", %{"text" => text}, sock) do
     Endpoint.broadcast("chat", "message", %{
@@ -28,15 +26,10 @@ defmodule FloodlightWeb.GameLive.Index do
     {:noreply, %{}}
   end
 
-  def handle_info(_, sock) do
-    IO.puts "yeeeeeEEEEeeeEEt"
-    {:noreply, sock}
-  end
-
   def on_info(%{event: "message", payload: msg}, sock) do
     IO.puts "yeet"
     {:noreply, %{
-      messages: sock.assign.messages ++ [msg],
+      messages: sock.assigns.messages ++ [msg],
     }}
   end
 
