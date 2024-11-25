@@ -35,3 +35,5 @@ floodlight-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# ADDED: ElixirLS for VSCode/VSCodium
+.elixir_ls/

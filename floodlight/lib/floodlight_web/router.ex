@@ -17,7 +17,9 @@ defmodule FloodlightWeb.Router do
   scope "/", FloodlightWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", PageController, :index
+
+    live "/game", GameLive.Index
   end
 
   # Other scopes may use custom stacks.
